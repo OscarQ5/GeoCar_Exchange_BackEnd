@@ -20,6 +20,7 @@ const getCar = async (id) => {
 
 const createCar = async (car) => {
   try {
+    const imageUrl = car.image_url || '/Users/oscarquintanilla/Git/Module 4/FS_Portfolio_project/Back-end/assets/CAR_DEFAULT.jpg';
     const newCar = await db.one(
       "INSERT INTO cars (make, model, year, price, color, mileage, condition, location, image_url, is_favorite) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
       [
@@ -31,7 +32,7 @@ const createCar = async (car) => {
         car.mileage,
         car.condition,
         car.location,
-        car.image_url,
+        imageUrl,
         car.is_favorite,
       ]
     );
@@ -55,6 +56,7 @@ const deleteCar = async (id) => {
 
 const updateCar = async (id, car) => {
   try {
+    const imageUrl = car.image_url || '/Users/oscarquintanilla/Git/Module 4/FS_Portfolio_project/Back-end/assets/CAR_DEFAULT.jpg';
     const updatedCar = await db.one(
       "UPDATE cars SET make=$1, model=$2, year=$3, price=$4, color=$5, mileage=$6, condition=$7, location=$8, image_url=$9, is_favorite=$10 WHERE id=$11 RETURNING *",
       [
@@ -66,7 +68,7 @@ const updateCar = async (id, car) => {
         car.mileage,
         car.condition,
         car.location,
-        car.image_url,
+        imageUrl,
         car.is_favorite,
         id,
       ]
