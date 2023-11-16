@@ -12,11 +12,11 @@ app.use("/cars", carsController);
 app.use("/static", express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the GeoCar Exchange!");
+    res.send("Welcome to the GeoCar Exchange!");
 });
 
 app.get("*", (req, res) => {
-  res.status(404).send("Page not found");
+    res.status(404).send("Page not found");
 });
 
 module.exports = app;
