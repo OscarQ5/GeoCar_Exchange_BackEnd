@@ -8,6 +8,14 @@ const {
   updateCar,
 } = require("../queries/cars.js");
 
+const {
+  checkMake,
+  checkModel,
+  checkYear,
+  checkPrice,
+  checkLocation,
+} = require("../validations/checkCars.js");
+
 cars.get("/", async (req, res) => {
   const allCars = await getAllCars();
   if (allCars[0]) {
@@ -27,7 +35,7 @@ cars.get("/:id", async (req, res) => {
   }
 });
 
-cars.post("/", async (req, res) => {
+cars.post("/", checkMake, checkModel, checkYear, checkPrice, checkLocation, async (req, res) => {
   const car = await createCar(req.body);
   res.status(201).json(car);
 });
@@ -42,7 +50,7 @@ cars.delete("/:id", async (req, res) => {
   }
 });
 
-cars.put("/:id", async (req, res) => {
+cars.put("/:id", checkMake, checkModel, checkYear, checkPrice, checkLocation, async (req, res) => {
   const { id } = req.params;
   const updatedCar = await updateCar(id, req.body);
   if (updatedCar.id) {

@@ -21,6 +21,7 @@ const getCar = async (id) => {
 const createCar = async (car) => {
   try {
     const imageUrl = car.image_url || '/Users/oscarquintanilla/Git/Module 4/FS_Portfolio_project/Back-end/assets/CAR_DEFAULT.jpg';
+    const isFavorite = car.is_favorite !== undefined ? car.is_favorite : false;
     const newCar = await db.one(
       "INSERT INTO cars (make, model, year, price, color, mileage, condition, location, image_url, is_favorite) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
       [
@@ -33,7 +34,7 @@ const createCar = async (car) => {
         car.condition,
         car.location,
         imageUrl,
-        car.is_favorite,
+        isFavorite,
       ]
     );
     return newCar;
