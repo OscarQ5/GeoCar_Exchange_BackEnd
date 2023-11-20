@@ -14,5 +14,6 @@ CREATE TABLE cars (
   condition VARCHAR(20) DEFAULT 'New' CHECK (condition IN ('New', 'Used', 'Certified')),
   location VARCHAR(255),
   image_url VARCHAR(255),
-  is_favorite BOOLEAN
+  is_favorite BOOLEAN,
+  for_sale BOOLEAN
 );
